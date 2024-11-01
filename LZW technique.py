@@ -1,8 +1,16 @@
-def LZWcompression(string):
+# get dictionary {key : character , value : ascii}
+def getCharDictionary():
     # put ascii code for A-Z and a-z
     Dict = {chr(i): i for i in range(65, 91)}  # A-Z
     Dict.update({chr(i): i for i in range(97, 123)})  # a-z
     Dict[' '] = 1  # for spaces
+    return Dict
+
+
+# compression take string and return array of integers
+def LZWcompression(string):
+    # put ascii code for A-Z and a-z and for space
+    Dict = getCharDictionary()
     # List carry compressed data <index>
     compressed = []
     # begin of string
@@ -44,17 +52,26 @@ def LZWcompression(string):
     return compressed
 
 
+# print codes in the compressed array in form of <integer>
 def printTag(compressed):
     print("the compressed tags : ")
     for index in compressed:
         print(f"<{index}>")
 
 
-def LZWdecompression(compressed):
+# get dictionary {key : ascii , value : character}
+def getCodeDictionary():
     # put ascii code for A-Z and a-z
     Dict = {i: chr(i) for i in range(65, 91)}  # A-Z
     Dict.update({i: chr(i) for i in range(97, 123)})  # a-z
     Dict[1] = ' '  # for spaces
+    return Dict
+
+
+# decompression take array of integers and return string
+def LZWdecompression(compressed):
+    # put ascii code for A-Z and a-z and space
+    Dict = getCodeDictionary()
     count = 128  # will be like ascii for longest match
     result = ""  # decompressed string
     # if empty or not array
@@ -85,13 +102,16 @@ def LZWdecompression(compressed):
     return result
 
 
-
+# print decompressed string 
 def printString(string):
     print("the Decompressed string : " + string)
+
 
 # Example : string
 # Example : "ABABBABA"
 # Example : "AAAAABBB"
+
+
 string = input("Enter your string to compress it or EXIT to stop the program : ")
 while string != "EXIT":
     print("_______________________________________________________")
@@ -99,6 +119,11 @@ while string != "EXIT":
     printTag(comp)
     print("_______________________________________________________")
     choice = input("Do you want to decompress it? Enter T or F : ")
+    while choice != 'T' and choice != 'F':
+        print("_______________________________________________________")
+        print("Please enter T or F only for decompression")
+        print("_______________________________________________________")
+        choice = input("Do you want to decompress it? Enter T or F : ")
     if choice == 'T':
         print("_______________________________________________________")
         printString(LZWdecompression(comp))
