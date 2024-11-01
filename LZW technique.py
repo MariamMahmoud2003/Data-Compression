@@ -3,7 +3,7 @@ def getCharDictionary():
     # put ascii code for A-Z and a-z
     Dict = {chr(i): i for i in range(65, 91)}  # A-Z
     Dict.update({chr(i): i for i in range(97, 123)})  # a-z
-    Dict[' '] = 1  # for spaces
+    Dict[' '] = 32  # for spaces
     return Dict
 
 
@@ -64,7 +64,7 @@ def getCodeDictionary():
     # put ascii code for A-Z and a-z
     Dict = {i: chr(i) for i in range(65, 91)}  # A-Z
     Dict.update({i: chr(i) for i in range(97, 123)})  # a-z
-    Dict[1] = ' '  # for spaces
+    Dict[32] = ' '  # for spaces
     return Dict
 
 
